@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Trip Fun Adventures</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Road Trip Fun Adventures</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#packages">Packages</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>Discover Your Next Adventure</h2>
+        <p>Explore our exciting road trip packages and create unforgettable memories!</p>
+    </section>
+
+    <section id="packages">
+        <h2>Our Packages</h2>
+        <div class="package">
+            <h3>Mountain Expedition</h3>
+            <p>Experience the breathtaking mountain views with our guided tours.</p>
+            <button onclick="showModal('mountainModal')">Learn More</button>
+        </div>
+        <div class="package">
+            <h3>Desert Safari</h3>
+            <p>Explore the vast desert landscapes and enjoy a unique adventure.</p>
+            <button onclick="showModal('desertModal')">Learn More</button>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="carousel-container">
+            <img src="/static/images/road car.jpg" alt="Road Trip Image 1" class="carousel-slide">
+            <img src="/static/images/road drive.jpg" alt="Road Trip Image 2" class="carousel-slide">
+            <img src="/static/images/road clear.jpg" alt="Road Trip Image 3" class="carousel-slide">
+            <img src="/static/images/environment walk.jpg" alt="Road Trip Image 4" class="carousel-slide">
+            <img src="/static/images/beach drive.jpg" alt="Road Trip Image 5" class="carousel-slide">
+            <img src="/static/images/cultural pics.jpg" alt="Road Trip Image 6" class="carousel-slide">
+            <img src="/static/images/skate beach.jpg" alt="Road Trip Image 7" class="carousel-slide">
+            <img src="/static/images/water beach.jpg" alt="Road Trip Image 8" class="carousel-slide">
+            <img src="/static/images/env view.jpg" alt="Road Trip Image 9" class="carousel-slide">
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or need more information, feel free to reach out to us:</p>
+        <form id="contactForm" action="contact" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone">
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+        <p>You can also reach us directly at:</p>
+        <p>Email: <a href="mailto:njorodenis860@gmail.com">njorodenis860@gmail.com</a></p>
+        <p>Phone: <a href="tel:+254700643849">+254700643849</a></p>
+        <p>Or connect with us on:</p>
+        <div class="social-links">
+            <a href="https://wa.me/+254700643849" target="_blank" title="Chat with us on WhatsApp">
+                <img src="{{ url_for('static', filename='images/whatsapp.png') }}" alt="WhatsApp" class="social-icon">
+            </a>
+            <a href="https://t.me/MERRICKsilval" target="_blank" title="Connect with us on Telegram">
+                <img src="{{ url_for('static', filename='images/telegram.png') }}" alt="Telegram" class="social-icon">
+            </a>
+            <a href="https://instagram.com/merricksilvar" target="_blank" title="Follow us on Instagram">
+                <img src="{{ url_for('static', filename='images/instagram.png') }}" alt="Instagram" class="social-icon">
+            </a>
+        </div>
+    </section>
+
+    <div id="mountainModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('mountainModal')">&times;</span>
+            <h2>Mountain Expedition</h2>
+            <p>Our Mountain Expedition package offers breathtaking views, guided tours, and unforgettable experiences in the mountains.</p>
+            <ul>
+                <li>Guided Tours</li>
+                <li>Mountain Hiking</li>
+                <li>Scenic Views</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="desertModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('desertModal')">&times;</span>
+            <h2>Desert Safari</h2>
+            <p>Our Desert Safari package includes thrilling desert rides, cultural experiences, and stunning landscapes.</p>
+            <ul>
+                <li>Desert Rides</li>
+                <li>Sandboarding</li>
+                <li>Cultural Experiences</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Road Trip Adventures. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("carousel-slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+
+        function plusSlides(n) {
+            slideIndex += n;
+            let slides = document.getElementsByClassName("carousel-slide");
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            if (slideIndex < 1) { slideIndex = slides.length; }
+            showSlides(); // Reuse showSlides to handle display logic
+        }
+
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        // Initialize the carousel
+        showSlides();
+    </script>
+</body>
+</html>
